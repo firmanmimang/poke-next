@@ -10,13 +10,11 @@ const nextConfig = {
               protocol: "https",
               hostname: "raw.githubusercontent.com"
           }
-      ]
+      ],
+      unoptimized: true,
   },
   basePath: process.env.BASE_PATH,
   output: 'export',
-  images: {
-    unoptimized: true,
-  },
 };
 
 // Configuration object tells the next-pwa plugin 
