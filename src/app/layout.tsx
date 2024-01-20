@@ -1,10 +1,16 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Inter as FontSans } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import Link from 'next/link'
-import { BASE_PATH } from '@/lib/utils'
+import { cn } from '@/lib/utils'
+import PokemonProvider from '@/store/PokemonProvider'
+import { getPokemonList } from '@/lib/pokemonAPI'
+import { Pokemon } from '@/type'
 
-const inter = Inter({ subsets: ['latin'] })
+export const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
 
 export const metadata = {
   title: 'Create Next App',
@@ -16,8 +22,8 @@ export const metadata = {
   viewport:
     "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
   icons: [
-    { rel: "apple-touch-icon", url: "icon-192x192.png" },
-    { rel: "icon", url: "icon-192x192.png" },
+    { rel: "apple-touch-icon", url: `${process.env.BASE_PATH}/icon-192x192.png` },
+    { rel: "icon", url: `${process.env.BASE_PATH}/icon-192x192.png` },
   ],
 }
 
@@ -26,21 +32,24 @@ export const metadata = {
 // Providers are generally on the client side ("use client")
 // Switch from light mode to dark mode <-- user interaction / needs the client to exist.
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const poke : Pokemon = await getPokemonList();
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className='scroll-smooth'>
+      <body className={cn("bg-background font-sans antialiased scroll-smooth",fontSans.variable)}>
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <main className="flex flex-col items-center min-h-screen p-24">
-            <div className="z-10 items-center justify-between w-full max-w-5xl text-sm lg:flex">
-              <Link href="/"><h2 className="text-2xl text-bold">PokemonFinder</h2></Link>
-            </div>
-            {children}
-          </main>
+          <PokemonProvider poke={poke}>
+            <main className="flex flex-col items-center p-5 lg:p-24 pb-0 lg:pb-0">
+              <div className="z-10 items-center justify-between w-full max-w-5xl text-sm lg:flex">
+                <Link href="/"><h2 className="text-2xl text-bold">PokemonFinder</h2></Link>
+              </div>
+              {children}
+            </main>
+          </PokemonProvider>
         </ThemeProvider>
       </body>
     </html>
