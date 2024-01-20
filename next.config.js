@@ -14,7 +14,6 @@ const nextConfig = {
       unoptimized: true,
   },
   basePath: process.env.BASE_PATH,
-  output: 'export',
 };
 
 // Configuration object tells the next-pwa plugin 

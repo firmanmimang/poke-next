@@ -1,15 +1,22 @@
 import './globals.css'
-import { Inter as FontSans } from 'next/font/google'
+// import { Inter as FontSans } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import PokemonProvider from '@/store/PokemonProvider'
 import { getPokemonList } from '@/lib/pokemonAPI'
-import { Pokemon } from '@/type'
+import { type Pokemon } from '@/type'
 
-export const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
+// export const fontSans = FontSans({
+//   subsets: ["latin"],
+//   variable: "--font-sans",
+//   display: 'swap',
+// })
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
 })
 
 export const metadata = {
@@ -40,7 +47,7 @@ export default async function RootLayout({
   const poke : Pokemon = await getPokemonList();
   return (
     <html lang="en" className='scroll-smooth'>
-      <body className={cn("bg-background font-sans antialiased scroll-smooth",fontSans.variable)}>
+      <body className={cn("bg-background font-sans antialiased scroll-smooth",inter.variable)}>
         <ThemeProvider attribute="class" defaultTheme="dark">
           <PokemonProvider poke={poke}>
             <main className="flex flex-col items-center p-5 lg:p-24 pb-0 lg:pb-0">

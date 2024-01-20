@@ -2,12 +2,15 @@ import { getPokemon, getPokemonList } from "@/lib/pokemonAPI";
 import { PokemonImage } from "@/components/pokemon-image";
 import { Progress } from "@/components/ui/progress";
 
-export async function generateStaticParams() {
-    const {pokeData} = await getPokemonList(1302)
-    return pokeData?.map((poke: any) => ({
-        pokemonName: poke.name,
-    }))
-}
+// export const dynamicParams = true
+export const dynamic = 'force-dynamic'
+
+// export async function generateStaticParams() {
+//     const {pokeData} = await getPokemonList(1000)
+//     return pokeData?.map((poke: any) => ({
+//         pokemonName: poke.name,
+//     }))
+// }
 
 export default async function PokemonPage({ params }: { params: { pokemonName: string } }) {
     const { pokemonName } = params;
