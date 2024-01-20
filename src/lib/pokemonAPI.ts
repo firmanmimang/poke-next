@@ -1,4 +1,3 @@
-"use server"
 
 import { POKEMON_API } from "./url";
 
