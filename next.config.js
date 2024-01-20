@@ -14,6 +14,7 @@ const nextConfig = {
       unoptimized: true,
   },
   basePath: process.env.BASE_PATH,
+  output: 'standalone',
 };
 
 // Configuration object tells the next-pwa plugin 

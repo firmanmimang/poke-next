@@ -3,14 +3,14 @@ import { PokemonImage } from "@/components/pokemon-image";
 import { Progress } from "@/components/ui/progress";
 
 // export const dynamicParams = true
-export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-dynamic'
 
-// export async function generateStaticParams() {
-//     const {pokeData} = await getPokemonList(1000)
-//     return pokeData?.map((poke: any) => ({
-//         pokemonName: poke.name,
-//     }))
-// }
+export async function generateStaticParams() {
+    const {pokeData} = await getPokemonList(1400)
+    return pokeData?.map((poke: any) => ({
+        pokemonName: poke.name,
+    }))
+}
 
 export default async function PokemonPage({ params }: { params: { pokemonName: string } }) {
     const { pokemonName } = params;
